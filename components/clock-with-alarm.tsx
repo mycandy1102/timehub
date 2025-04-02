@@ -138,16 +138,16 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
   // 根據縮放級別計算字體大小
   const getDigitFontSize = () => {
     // 基礎大小為 7xl (60px)
-    const baseSizeClass = "text-7xl"
+    const baseSizeClass = "text-5xl sm:text-6xl md:text-7xl"
 
     if (zoomLevel <= 1) {
       return baseSizeClass
     } else if (zoomLevel <= 1.3) {
-      return "text-8xl" // 72px
+      return "text-6xl sm:text-7xl md:text-8xl" // 72px
     } else if (zoomLevel <= 1.6) {
-      return "text-9xl" // 96px
+      return "text-7xl sm:text-8xl md:text-9xl" // 96px
     } else {
-      return "text-[10rem]" // 160px
+      return "text-8xl sm:text-9xl md:text-[10rem]" // 160px
     }
   }
 
@@ -243,12 +243,12 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
   return (
     <div className="w-full max-w-3xl mx-auto">
       {/* Clock Display */}
-      <div className="flex flex-col items-center justify-center mb-10">
+      <div className="flex flex-col items-center justify-center mb-6">
         {activeAlarm && (
-          <div className="mb-6 p-6 bg-white dark:bg-black border-2 border-primary dark:border-vclock-orange rounded-lg flex flex-col items-center justify-between w-full max-w-md">
-            <div className="flex items-center mb-4">
-              <Bell className="h-8 w-8 mr-3 animate-bounce text-primary dark:text-vclock-orange" />
-              <span className="text-2xl font-bold text-primary dark:text-vclock-orange">Alarm!</span>
+          <div className="mb-4 p-3 sm:p-4 bg-white dark:bg-black border-2 border-primary dark:border-vclock-orange rounded-lg flex flex-col items-center justify-between w-full max-w-md">
+            <div className="flex items-center mb-2">
+              <Bell className="h-6 w-6 mr-2 animate-bounce text-primary dark:text-vclock-orange" />
+              <span className="text-xl font-bold text-primary dark:text-vclock-orange">Alarm!</span>
             </div>
             <Button
               className="w-full bg-primary hover:bg-primary/90 dark:bg-vclock-button dark:hover:bg-vclock-buttonHover text-white border-none"
@@ -259,10 +259,10 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
           </div>
         )}
 
-        {/* Digital Clock Display - Updated with zoom level */}
-        <div className="flex items-center justify-center mb-6">
+        {/* Digital Clock Display - Updated with responsive design */}
+        <div className="flex items-center justify-center mb-3 sm:mb-4">
           {/* Hours */}
-          <div className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg p-4 shadow-lg mx-1">
+          <div className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg p-2 sm:p-3 shadow-lg mx-1">
             <div className={`${digitFontSize} font-digital tracking-wider ${getColorClass()}`}>{hoursStr}</div>
             <div className="absolute inset-0 pointer-events-none blur-sm opacity-30 dark:opacity-40 flex items-center justify-center">
               <div className={`${digitFontSize} font-digital tracking-wider ${getColorClass()}`}>{hoursStr}</div>
@@ -271,14 +271,14 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
 
           {/* Colon */}
           <div
-            className={`text-5xl md:text-6xl font-bold mx-1 text-gray-500 dark:text-gray-400 flex flex-col ${blinkColon ? "opacity-100" : "opacity-30"} transition-opacity duration-100`}
+            className={`text-3xl sm:text-4xl md:text-5xl font-bold mx-1 text-gray-500 dark:text-gray-400 flex flex-col ${blinkColon ? "opacity-100" : "opacity-30"} transition-opacity duration-100`}
           >
-            <span className="mb-2">•</span>
+            <span className="mb-1">•</span>
             <span>•</span>
           </div>
 
           {/* Minutes */}
-          <div className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg p-4 shadow-lg mx-1">
+          <div className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg p-2 sm:p-3 shadow-lg mx-1">
             <div className={`${digitFontSize} font-digital tracking-wider ${getColorClass()}`}>{minutes}</div>
             <div className="absolute inset-0 pointer-events-none blur-sm opacity-30 dark:opacity-40 flex items-center justify-center">
               <div className={`${digitFontSize} font-digital tracking-wider ${getColorClass()}`}>{minutes}</div>
@@ -287,14 +287,14 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
 
           {/* Colon */}
           <div
-            className={`text-5xl md:text-6xl font-bold mx-1 text-gray-500 dark:text-gray-400 flex flex-col ${blinkColon ? "opacity-100" : "opacity-30"} transition-opacity duration-100`}
+            className={`text-3xl sm:text-4xl md:text-5xl font-bold mx-1 text-gray-500 dark:text-gray-400 flex flex-col ${blinkColon ? "opacity-100" : "opacity-30"} transition-opacity duration-100`}
           >
-            <span className="mb-2">•</span>
+            <span className="mb-1">•</span>
             <span>•</span>
           </div>
 
           {/* Seconds */}
-          <div className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg p-4 shadow-lg mx-1">
+          <div className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg p-2 sm:p-3 shadow-lg mx-1">
             <div className={`${digitFontSize} font-digital tracking-wider ${getColorClass()}`}>{seconds}</div>
             <div className="absolute inset-0 pointer-events-none blur-sm opacity-30 dark:opacity-40 flex items-center justify-center">
               <div className={`${digitFontSize} font-digital tracking-wider ${getColorClass()}`}>{seconds}</div>
@@ -303,7 +303,7 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
 
           {/* AM/PM */}
           {use12HourFormat && (
-            <div className="ml-4 text-3xl md:text-4xl font-bold text-gray-600 dark:text-gray-300 self-center">
+            <div className="ml-2 sm:ml-3 text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 dark:text-gray-300 self-center">
               {ampm}
             </div>
           )}
@@ -311,50 +311,52 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
 
         {/* Date Display */}
         {showDate && (
-          <div className="text-xl md:text-2xl font-digital tracking-wider text-gray-600 dark:text-gray-300 mb-8">
+          <div className="text-base sm:text-lg md:text-xl font-digital tracking-wider text-gray-600 dark:text-gray-300 mb-4">
             {formattedDate}
           </div>
         )}
       </div>
 
       {/* Alarm Section */}
-      <div className="bg-white dark:bg-black border border-gray-200 dark:border-vclock-muted rounded-lg p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-primary dark:text-vclock-orange">Set Alarm</h2>
+      <div className="bg-white dark:bg-black border border-gray-200 dark:border-vclock-muted rounded-lg p-3 sm:p-4 shadow-lg">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-primary dark:text-vclock-orange">Set Alarm</h2>
 
-        <div className="flex gap-3 mb-8">
+        <div className="flex gap-2 sm:gap-3 mb-4 sm:mb-6">
           <Input
             type="time"
             value={newAlarmTime}
             onChange={(e) => setNewAlarmTime(e.target.value)}
-            className="flex-1 bg-white dark:bg-black border-gray-200 dark:border-vclock-muted text-gray-800 dark:text-vclock-orange focus:border-primary dark:focus:border-vclock-orange"
+            className="flex-1 bg-white dark:bg-black border-gray-200 dark:border-vclock-muted text-gray-800 dark:text-vclock-orange focus:border-primary dark:focus:border-vclock-orange h-9 sm:h-10"
           />
           <Button
             onClick={addAlarm}
-            className="bg-primary hover:bg-primary/90 dark:bg-vclock-button dark:hover:bg-vclock-buttonHover text-white border-none"
+            className="bg-primary hover:bg-primary/90 dark:bg-vclock-button dark:hover:bg-vclock-buttonHover text-white border-none h-9 sm:h-10 px-3 sm:px-4"
           >
-            <Plus className="h-4 w-4 mr-2" />
-            Add
+            <Plus className="h-4 w-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">Add</span>
           </Button>
         </div>
 
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-primary/80 dark:text-vclock-amber mb-2">Alarms</h3>
+        <div className="space-y-2 sm:space-y-3 max-h-[calc(100vh-28rem)] md:max-h-[calc(100vh-24rem)] overflow-y-auto pr-1">
+          <h3 className="text-base sm:text-lg font-semibold text-primary/80 dark:text-vclock-amber mb-1 sm:mb-2">
+            Alarms
+          </h3>
 
           {alarms.length === 0 ? (
-            <p className="text-center text-gray-500 dark:text-vclock-muted py-4">No alarms set</p>
+            <p className="text-center text-gray-500 dark:text-vclock-muted py-2 sm:py-3">No alarms set</p>
           ) : (
             alarms.map((alarm) => (
               <div
                 key={alarm.id}
-                className={`flex items-center justify-between p-4 border border-gray-200 dark:border-vclock-muted rounded-lg bg-white dark:bg-black/50 ${alarm.triggered && alarm.enabled ? "border-primary dark:border-vclock-orange" : ""}`}
+                className={`flex items-center justify-between p-2 sm:p-3 border border-gray-200 dark:border-vclock-muted rounded-lg bg-white dark:bg-black/50 ${alarm.triggered && alarm.enabled ? "border-primary dark:border-vclock-orange" : ""}`}
               >
-                <div className="font-mono text-xl text-primary dark:text-vclock-orange">
+                <div className="font-mono text-base sm:text-lg text-primary dark:text-vclock-orange">
                   {alarm.time}
                   {alarm.triggered && alarm.enabled && (
-                    <span className="ml-2 text-xs text-gray-500 dark:text-vclock-muted">(Triggered today)</span>
+                    <span className="ml-2 text-xs text-gray-500 dark:text-vclock-muted">(Today)</span>
                   )}
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <Switch
                     checked={alarm.enabled}
                     onCheckedChange={() => toggleAlarm(alarm.id)}
@@ -364,7 +366,7 @@ export function ClockWithAlarm({ zoomLevel = 1 }: ClockWithAlarmProps) {
                     variant="ghost"
                     size="icon"
                     onClick={() => deleteAlarm(alarm.id)}
-                    className="hover:bg-gray-100 dark:hover:bg-vclock-muted/20 text-red-500"
+                    className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-vclock-muted/20 text-red-500"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>

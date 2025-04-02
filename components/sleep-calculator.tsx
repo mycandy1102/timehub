@@ -151,7 +151,7 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
     return `${hour}:${minute.toString().padStart(2, "0")} ${period}`
   }
 
-  // 修改計算就寢時間的函數
+  // 計算就寢時間
   const calculateBedtime = () => {
     // 獲取選擇的起床時間（分鐘）
     const wakeMinutes = timeToMinutes(selectedHour, selectedMinute, isPM)
@@ -170,7 +170,7 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
     setView("bedtime")
   }
 
-  // 修改計算起床時間的函數，將第一個時間改為當前時間加上 9 小時又 15 分鐘
+  // 計算起床時間
   const calculateWakeup = () => {
     // 獲取當前時間（分鐘）
     const now = new Date()
@@ -202,15 +202,17 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
     return `${hour}:${minute.toString().padStart(2, "0")} ${isPM ? "PM" : "AM"}`
   }
 
-  // 渲染主頁面
+  // 渲染主頁面 - 更緊湊的設計
   const renderMainView = () => (
-    <div className="flex flex-col items-center justify-center space-y-8">
-      <h2 className="text-3xl font-bold text-primary dark:text-vclock-orange">Sleep Calculator</h2>
+    <div className="flex flex-col items-center justify-center space-y-4 md:space-y-6">
+      <h2 className="text-2xl md:text-3xl font-bold text-primary dark:text-vclock-orange">Sleep Calculator</h2>
 
-      <div className="text-center mb-4">
-        <p className="text-lg text-gray-700 dark:text-vclock-amber mb-4">What time do you want to wake up?</p>
+      <div className="text-center mb-2 md:mb-4">
+        <p className="text-sm md:text-lg text-gray-700 dark:text-vclock-amber mb-2 md:mb-4">
+          What time do you want to wake up?
+        </p>
 
-        <div className="relative bg-white dark:bg-[#0a2a14] border-4 border-gray-300 dark:border-[#2a6633] rounded-xl p-6 w-80 mx-auto shadow-lg">
+        <div className="relative bg-white dark:bg-[#0a2a14] border-4 border-gray-300 dark:border-[#2a6633] rounded-xl p-3 md:p-6 w-full max-w-xs md:max-w-sm mx-auto shadow-lg">
           <div className="flex items-center justify-center">
             {/* 小時選擇器 */}
             <div className="flex flex-col items-center">
@@ -218,12 +220,12 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
                 onClick={incrementHour}
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white p-1"
               >
-                <ChevronUp className="h-6 w-6" />
+                <ChevronUp className="h-5 w-5" />
               </button>
 
               <div
                 ref={hourRef}
-                className="w-24 h-16 flex items-center justify-center text-5xl font-bold text-gray-800 dark:text-white cursor-ns-resize"
+                className="w-16 md:w-20 h-12 md:h-16 flex items-center justify-center text-3xl md:text-5xl font-bold text-gray-800 dark:text-white cursor-ns-resize"
               >
                 {selectedHour.toString().padStart(2, "0")}
               </div>
@@ -232,11 +234,11 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
                 onClick={decrementHour}
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white p-1"
               >
-                <ChevronDown className="h-6 w-6" />
+                <ChevronDown className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="text-4xl mx-2 text-gray-800 dark:text-white">:</div>
+            <div className="text-3xl md:text-4xl mx-1 md:mx-2 text-gray-800 dark:text-white">:</div>
 
             {/* 分鐘選擇器 */}
             <div className="flex flex-col items-center">
@@ -244,12 +246,12 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
                 onClick={incrementMinute}
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white p-1"
               >
-                <ChevronUp className="h-6 w-6" />
+                <ChevronUp className="h-5 w-5" />
               </button>
 
               <div
                 ref={minuteRef}
-                className="w-24 h-16 flex items-center justify-center text-5xl font-bold text-gray-800 dark:text-white cursor-ns-resize"
+                className="w-16 md:w-20 h-12 md:h-16 flex items-center justify-center text-3xl md:text-5xl font-bold text-gray-800 dark:text-white cursor-ns-resize"
               >
                 {selectedMinute.toString().padStart(2, "0")}
               </div>
@@ -258,7 +260,7 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
                 onClick={decrementMinute}
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white p-1"
               >
-                <ChevronDown className="h-6 w-6" />
+                <ChevronDown className="h-5 w-5" />
               </button>
             </div>
 
@@ -266,39 +268,37 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
             <div
               ref={ampmRef}
               onClick={toggleAMPM}
-              className="w-20 h-16 flex items-center justify-center text-3xl font-bold text-gray-800 dark:text-white ml-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1a4220] rounded-lg transition-colors"
+              className="w-16 md:w-20 h-12 md:h-16 flex items-center justify-center text-xl md:text-3xl font-bold text-gray-800 dark:text-white ml-2 md:ml-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1a4220] rounded-lg transition-colors"
             >
               {isPM ? "PM" : "AM"}
             </div>
           </div>
 
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+          <div className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
             Scroll or click arrows to change time
           </div>
         </div>
       </div>
 
-      <Button
-        onClick={calculateBedtime}
-        className="w-72 py-6 text-lg bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
-      >
-        Calculate bedtime <Moon className="ml-2 h-5 w-5" />
-      </Button>
-
-      <div className="text-center mt-4">
-        <p className="text-lg text-gray-700 dark:text-vclock-amber">If you want to go to bed now...</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 w-full max-w-md">
+        <Button
+          onClick={calculateBedtime}
+          className="py-3 md:py-4 text-sm md:text-lg bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
+        >
+          Calculate bedtime <Moon className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+        </Button>
 
         <Button
           onClick={calculateWakeup}
-          className="w-72 py-6 text-lg mt-4 bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
+          className="py-3 md:py-4 text-sm md:text-lg bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
         >
-          Calculate wake-up time <Alarm className="ml-2 h-5 w-5" />
+          Calculate wake-up <Alarm className="ml-2 h-4 w-4 md:h-5 md:w-5" />
         </Button>
       </div>
     </div>
   )
 
-  // 修改渲染就寢時間結果的函數
+  // 渲染就寢時間結果 - 更緊湊的設計
   const renderBedtimeResults = () => {
     const wakeupTimeStr = `${selectedHour}:${selectedMinute.toString().padStart(2, "0")} ${isPM ? "PM" : "AM"}`
 
@@ -308,55 +308,52 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
 
     return (
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-3xl font-bold text-primary dark:text-vclock-orange mb-6">Bedtime</h2>
+        <h2 className="text-xl md:text-3xl font-bold text-primary dark:text-vclock-orange mb-2 md:mb-4">Bedtime</h2>
 
-        <p className="text-xl text-gray-800 dark:text-white text-center mb-2">
-          The average human takes 15 minutes to fall asleep.
-        </p>
-        <p className="text-xl text-gray-800 dark:text-white text-center mb-8">
-          To wake up refreshed at {wakeupTimeStr}, you need go to sleep at one of the following times:
+        <p className="text-sm md:text-lg text-gray-800 dark:text-white text-center mb-1 md:mb-2">
+          To wake up at <span className="font-semibold">{wakeupTimeStr}</span>, sleep at:
         </p>
 
         {/* 建議時間 - 並排顯示 */}
-        <div className="grid grid-cols-2 gap-6 mb-10 w-full max-w-xl">
+        <div className="grid grid-cols-2 gap-3 md:gap-6 my-3 md:my-4 w-full max-w-md">
           {suggestedResults.map((time, index) => (
             <div
               key={index}
-              className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-4 flex justify-between items-center shadow-md"
+              className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-2 md:p-4 flex justify-between items-center shadow-md"
             >
-              <div className="text-3xl font-bold text-gray-800 dark:text-white">{time}</div>
-              <div className="text-sm text-primary dark:text-[#e6d9a5] font-semibold">SUGGESTED</div>
+              <div className="text-lg md:text-2xl font-bold text-gray-800 dark:text-white">{time}</div>
+              <div className="text-xs md:text-sm text-primary dark:text-[#e6d9a5] font-semibold">SUGGESTED</div>
             </div>
           ))}
         </div>
 
         {/* 其他時間選項 - 網格布局 */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 w-full max-w-xl">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3 mb-3 md:mb-6 w-full max-w-md">
           {otherResults.map((time, index) => (
-            <div key={`other-${index}`} className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-3 text-center">
-              <div className="text-xl font-bold text-gray-800 dark:text-white">{time}</div>
+            <div key={`other-${index}`} className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-2 text-center">
+              <div className="text-sm md:text-lg font-bold text-gray-800 dark:text-white">{time}</div>
             </div>
           ))}
         </div>
 
-        <p className="text-lg text-gray-700 dark:text-white text-center mb-2">
-          If you go to sleep at one of these times, you'll rise in between 90-minute sleep cycles.
+        <p className="text-xs md:text-sm text-gray-700 dark:text-white text-center mb-1">
+          These times ensure you wake up between sleep cycles.
         </p>
-        <p className="text-lg text-gray-700 dark:text-white text-center mb-8">
-          A good night's sleep consists of 5-6 complete sleep cycles.
+        <p className="text-xs md:text-sm text-gray-700 dark:text-white text-center mb-4">
+          A good night's sleep consists of 5-6 complete cycles.
         </p>
 
         <Button
           onClick={() => setView("main")}
-          className="w-64 py-4 text-lg bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
+          className="w-full max-w-xs py-2 md:py-3 text-sm md:text-base bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
         >
-          Go back <ArrowLeft className="ml-2 h-5 w-5" />
+          Go back <ArrowLeft className="ml-2 h-4 w-4" />
         </Button>
       </div>
     )
   }
 
-  // 修改渲染起床時間結果的函數
+  // 渲染起床時間結果 - 更緊湊的設計
   const renderWakeupResults = () => {
     const bedtimeStr = getCurrentTimeString()
 
@@ -366,49 +363,48 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
 
     return (
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-3xl font-bold text-primary dark:text-vclock-orange mb-6">Wake-up Time</h2>
+        <h2 className="text-xl md:text-3xl font-bold text-primary dark:text-vclock-orange mb-2 md:mb-4">
+          Wake-up Time
+        </h2>
 
-        <p className="text-xl text-gray-800 dark:text-white text-center mb-2">
-          The average human takes 15 minutes to fall asleep.
-        </p>
-        <p className="text-xl text-gray-800 dark:text-white text-center mb-8">
-          If you go to bed at {bedtimeStr}, you should wake up at one of these times:
+        <p className="text-sm md:text-lg text-gray-800 dark:text-white text-center mb-1 md:mb-2">
+          If you go to bed at <span className="font-semibold">{bedtimeStr}</span>, wake up at:
         </p>
 
         {/* 建議時間 - 並排顯示 */}
-        <div className="grid grid-cols-2 gap-6 mb-10 w-full max-w-xl">
+        <div className="grid grid-cols-2 gap-3 md:gap-6 my-3 md:my-4 w-full max-w-md">
           {suggestedResults.map((time, index) => (
             <div
               key={index}
-              className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-4 flex justify-between items-center shadow-md"
+              className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-2 md:p-4 flex justify-between items-center shadow-md"
             >
-              <div className="text-3xl font-bold text-gray-800 dark:text-white">{time}</div>
-              <div className="text-sm text-primary dark:text-[#e6d9a5] font-semibold">SUGGESTED</div>
+              <div className="text-lg md:text-2xl font-bold text-gray-800 dark:text-white">{time}</div>
+              <div className="text-xs md:text-sm text-primary dark:text-[#e6d9a5] font-semibold">SUGGESTED</div>
             </div>
           ))}
         </div>
 
         {/* 其他時間選項 - 網格布局 */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 w-full max-w-xl">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3 mb-3 md:mb-6 w-full max-w-md">
           {otherResults.map((time, index) => (
-            <div key={`other-${index}`} className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-3 text-center">
-              <div className="text-xl font-bold text-gray-800 dark:text-white">{time}</div>
+            <div key={`other-${index}`} className="bg-gray-100 dark:bg-[#1a2042] rounded-lg p-2 text-center">
+              <div className="text-sm md:text-lg font-bold text-gray-800 dark:text-white">{time}</div>
             </div>
           ))}
         </div>
 
-        <p className="text-lg text-gray-700 dark:text-white text-center mb-2">
-          If you wake up at one of these times, you'll rise in between 90-minute sleep cycles.
+        <p className="text-xs md:text-sm text-gray-700 dark:text-white text-center mb-1">
+          These times ensure you wake up between sleep cycles.
         </p>
-        <p className="text-lg text-gray-700 dark:text-white text-center mb-8">
-          A good night's sleep consists of 5-6 complete sleep cycles.
+        <p className="text-xs md:text-sm text-gray-700 dark:text-white text-center mb-4">
+          A good night's sleep consists of 5-6 complete cycles.
         </p>
 
         <Button
           onClick={() => setView("main")}
-          className="w-64 py-4 text-lg bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
+          className="w-full max-w-xs py-2 md:py-3 text-sm md:text-base bg-primary hover:bg-primary/90 dark:bg-[#e6d9a5] dark:hover:bg-[#d6c98f] text-white dark:text-[#0a0f2a] font-semibold rounded-md"
         >
-          Go back <ArrowLeft className="ml-2 h-5 w-5" />
+          Go back <ArrowLeft className="ml-2 h-4 w-4" />
         </Button>
       </div>
     )
@@ -416,7 +412,7 @@ export function SleepCalculator({ isDarkMode = false, zoomLevel = 1 }: SleepCalc
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <div className="bg-white dark:bg-[#0a2a14] border border-gray-200 dark:border-vclock-muted/30 rounded-lg p-6 shadow-lg">
+      <div className="bg-white dark:bg-[#0a2a14] border border-gray-200 dark:border-vclock-muted/30 rounded-lg p-3 md:p-6 shadow-lg">
         {view === "main" && renderMainView()}
         {view === "bedtime" && renderBedtimeResults()}
         {view === "wakeup" && renderWakeupResults()}
